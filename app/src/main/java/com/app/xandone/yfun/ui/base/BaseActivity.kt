@@ -17,13 +17,9 @@ abstract class BaseActivity : AppCompatActivity() {
         initData()
     }
 
-    protected fun initView() {
+    protected abstract fun initView()
 
-    }
-
-    protected fun initData() {
-
-    }
+    protected abstract fun initData()
 
     protected abstract fun setLayout(layoutId: Int): Int
 
