@@ -14,9 +14,10 @@ import com.app.xandone.yfun.ui.base.BaseFragment
  * created on: 2017/8/23 16:24
  */
 class FunnyFragment : BaseFragment() {
+    lateinit var mRecycle: RecyclerView
+
     lateinit var funAdapter: FunAdapter
     var dataList = ArrayList<FunBean>()
-    lateinit var mRecycle: RecyclerView
 
     override fun getLayout(layoutId: Int): Int {
         return R.layout.frag_funny_layout

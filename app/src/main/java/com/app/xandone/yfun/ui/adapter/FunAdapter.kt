@@ -27,7 +27,7 @@ class FunAdapter(var dataList: List<FunBean>) : RecyclerView.Adapter<FunAdapter.
     fun bindView(itemView: View, position: Int) {
         var funBean = dataList[position]
         itemView.fun_item_title.text = funBean.title
-        itemView.fun_item_content.text = funBean.title
+        itemView.fun_item_content.text = funBean.content
     }
 
     class FunViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

@@ -6,3 +6,5 @@ package com.app.xandone.yfun.bean
  */
 
 data class FunBean(var title: String, var content: String, var imgUrl: String)
+
+data class WeatherBean(var title: String, var content: String)

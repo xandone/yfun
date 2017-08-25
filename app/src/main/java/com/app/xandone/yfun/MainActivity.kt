@@ -46,10 +46,10 @@ class MainActivity : BaseActivity() {
         mainVpAadpter = MainVpAdaper(fragments, titles, supportFragmentManager)
         mainVp.adapter = mainVpAadpter
         tabLayout.setupWithViewPager(mainVp)
-
     }
 
     override fun initData() {
+        toolbar.setTitle(R.string.app_name)
     }
 
 

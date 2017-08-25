@@ -6,7 +6,7 @@
 
     <color name="white">#fff</color>
     <color name="black">#000</color>
-    <color name="light_black">#3D3C3C</color>
+    <color name="dark_black">#3D3C3C</color>
     <color name="normal_tv">#3D3C3C</color>
     <color name="light_tv">#A0A6A5</color>
     <color name="light_tv_black">#6A6868</color>
