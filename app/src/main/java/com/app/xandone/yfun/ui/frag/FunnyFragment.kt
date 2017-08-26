@@ -25,7 +25,7 @@ class FunnyFragment : BaseFragment() {
 
     override fun initView(view: View?) {
         mRecycle = view?.findViewById(R.id.frag_fun_recycle) as RecyclerView
-        funAdapter = FunAdapter(dataList)
+        funAdapter = FunAdapter(dataList, activity)
         mRecycle.adapter = funAdapter
         mRecycle.layoutManager = LinearLayoutManager(this.activity)
     }
