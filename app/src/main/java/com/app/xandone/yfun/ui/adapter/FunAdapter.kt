@@ -1,7 +1,12 @@
 package com.app.xandone.yfun.ui.adapter
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.support.v7.widget.RecyclerView
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +15,19 @@ import android.view.animation.AnimationUtils
 import com.app.xandone.yfun.App
 import com.app.xandone.yfun.R
 import com.app.xandone.yfun.bean.FunBean
+import com.app.xandone.yfun.ui.activity.FunDtailsActivity
 import kotlinx.android.synthetic.main.item_fun_recycle.view.*//直接可以调用layout view id
 
 /**
  * author: xandone
  * created on: 2017/8/24 13:20
  */
-class FunAdapter(var dataList: List<FunBean>, var context: Context) : RecyclerView.Adapter<FunAdapter.FunViewHolder>() {
+class FunAdapter(var dataList: List<FunBean>, var activity: Activity) : RecyclerView.Adapter<FunAdapter.FunViewHolder>() {
     var mLastPosition = -1
+
+    companion object {
+        val FUNADAPTER_POTISION = "FunAdapter_potision"
+    }
 
     override fun onBindViewHolder(holder: FunViewHolder, position: Int) {
         bindView(holder.itemView, position)
@@ -35,12 +45,25 @@ class FunAdapter(var dataList: List<FunBean>, var context: Context) : RecyclerVi
         var funBean = dataList[position]
         itemView.fun_item_title.text = funBean.title
         itemView.fun_item_content.text = funBean.content
+        itemView.fun_item_root.setOnClickListener({
+            var intent = Intent(activity, FunDtailsActivity::class.java)
+            intent.putExtra(FUNADAPTER_POTISION, dataList[position])
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity,
+                        Pair.create<View, String>(itemView.fun_item_title as View?, "joke_item_title_trans"),
+                        Pair.create<View, String>(itemView.fun_item_content as View?, "joke_item_content_trans"),
+                        Pair.create<View, String>(itemView.fun_item_img as View?, "joke_item_img_trans")).toBundle())
+            } else {
+
+            }
+        })
+
     }
 
     fun showAnim(view: View, position: Int) {
         if (position > mLastPosition) {
             view.post {
-                var anim = AnimationUtils.loadAnimation(context, R.anim.item_left_slide)
+                var anim = AnimationUtils.loadAnimation(activity, R.anim.item_left_slide)
                 anim.setAnimationListener(object : Animation.AnimationListener {
                     override fun onAnimationRepeat(animation: Animation?) {
                     }

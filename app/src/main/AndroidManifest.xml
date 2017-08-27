@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.FunDtailsActivity"
+            android:label="@string/app_fun_name_details" />
     </application>
 
 </manifest>

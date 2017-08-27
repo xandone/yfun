@@ -3,4 +3,5 @@
 
     <string name="app_weather_name">天气</string>
     <string name="app_fun_name">笑话</string>
+    <string name="app_fun_name_details">笑话详情</string>
 </resources>
