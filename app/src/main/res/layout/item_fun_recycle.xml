@@ -36,11 +36,11 @@
 
     <ImageView
         android:id="@+id/fun_item_img"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/settingsun"
         android:transitionName="joke_item_img_trans" />
 
 </LinearLayout>

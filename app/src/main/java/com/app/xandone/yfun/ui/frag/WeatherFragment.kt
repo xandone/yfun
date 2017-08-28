@@ -33,7 +33,7 @@ class WeatherFragment : BaseFragment() {
     }
 
     override fun initData() {
-        for (i in 0..6) {
+        for (i in 0..3) {
             dataList.add(WeatherBean("天气" + i, "晴天"))
         }
         mWeatherAdapter.notifyDataSetChanged()
