@@ -1,19 +1,20 @@
 package com.app.xandone.yfun.ui.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.xandone.yfun.R
+import com.app.xandone.yfun.bean.WeatherXml
 import com.app.xandone.yfun.bean.WeatherXmlData
 import kotlinx.android.synthetic.main.item_weather_one.view.*
+import kotlinx.android.synthetic.main.item_weather_other.view.*
 
 /**
  * author: xandone
  * created on: 2017/8/24 14:38
  */
-class WeatherAdapter(var dataList: List<WeatherXmlData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherAdapter(var dataList: List<WeatherXml>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val ITEM_TYPE_ONE: Int = 1
     val ITEM_TYPE_NORMAL: Int = 2
 
@@ -28,11 +29,11 @@ class WeatherAdapter(var dataList: List<WeatherXmlData>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        var weatherBean: WeatherXmlData = dataList[position]
+        var weatherBean: WeatherXml = dataList[position]
         if (holder is WeatherHolderOne) {
-            holder.bindView(holder.itemView, weatherBean)
+            holder.bindView(holder.itemView, weatherBean.list[0])
         } else if (holder is WeatherHolderOther) {
-            holder.bindView(holder.itemView, weatherBean)
+            holder.bindView(holder.itemView, weatherBean.list[0], position)
         }
     }
 
@@ -42,13 +43,19 @@ class WeatherAdapter(var dataList: List<WeatherXmlData>) : RecyclerView.Adapter<
     class WeatherHolderOne(view: View) : RecyclerView.ViewHolder(view) {
         fun bindView(view: View, weatherBean: WeatherXmlData) {
             view.one_status.text = weatherBean.status1
-            view.one_status_temp_l.text = weatherBean.temperature1
-            view.one_status_temp_h.text = weatherBean.temperature2
+            view.one_status_temp_l.text = weatherBean.temperature2
+            view.one_status_temp_h.text = weatherBean.temperature1
         }
     }
 
     class WeatherHolderOther(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindView(view: View, weatherBean: WeatherXmlData) {
+        var date = arrayOf("明　天", "后　天", "大后天")
+        fun bindView(view: View, weatherBean: WeatherXmlData, posintion: Int) {
+            view.future_weather_item_date.text = date[posintion - 1]
+            view.future_weather_item_weather_tv.text = weatherBean.status1
+            view.future_weather_item_temp_tv.text = weatherBean.temperature2 + "—" + weatherBean.temperature1 + "℃"
+            view.future_weather_item_wind_tv.text = weatherBean.power1
+            view.future_weather_item_feel_tv.text = weatherBean.ssd_l
         }
     }
 

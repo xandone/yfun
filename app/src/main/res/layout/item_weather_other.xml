@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/future_weather_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +15,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:textColor="@color/light_tv_black"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        tools:text="明天" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,26 +29,26 @@
         <TextView
             android:id="@+id/future_weather_item_weather_tv"
             style="@style/andone_weather_furture_tv"
-            android:drawableLeft="@drawable/ic_launcher" />
+            android:drawableLeft="@drawable/wea" />
 
         <TextView
             android:id="@+id/future_weather_item_temp_tv"
             style="@style/andone_weather_furture_tv"
             android:layout_toRightOf="@id/future_weather_item_weather_tv"
-            android:drawableLeft="@drawable/ic_launcher" />
+            android:drawableLeft="@drawable/temp" />
 
         <TextView
             android:id="@+id/future_weather_item_wind_tv"
             style="@style/andone_weather_furture_tv"
             android:layout_below="@id/future_weather_item_weather_tv"
-            android:drawableLeft="@drawable/ic_launcher" />
+            android:drawableLeft="@drawable/wind" />
 
         <TextView
             android:id="@+id/future_weather_item_feel_tv"
             style="@style/andone_weather_furture_tv"
             android:layout_below="@id/future_weather_item_weather_tv"
             android:layout_toRightOf="@id/future_weather_item_wind_tv"
-            android:drawableLeft="@drawable/ic_launcher" />
+            android:drawableLeft="@drawable/feel" />
 
     </RelativeLayout>
 

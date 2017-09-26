@@ -2,10 +2,7 @@ package com.app.xandone.yfun.api
 
 import com.app.xandone.yfun.bean.WeatherXml
 import io.reactivex.Flowable
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * author: xandone
@@ -13,7 +10,14 @@ import retrofit2.http.POST
  */
 
 interface ApiService {
-    @FormUrlEncoded
-    @POST("xml.php")
-    fun getWeather(@FieldMap map: Map<String, String>): Flowable<WeatherXml>
+//    @FormUrlEncoded
+//    @POST("xml.php")
+//    fun getWeather(@FieldMap map: Map<String, String>): Flowable<WeatherXml>
+
+    @GET("xml.php")
+    fun getWeather(
+            @Query(value = "city", encoded = true) city: String,
+            @Query("password") psw: String,
+            @Query("day") day: String
+    ): Flowable<WeatherXml>
 }

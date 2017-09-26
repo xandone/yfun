@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import com.app.xandone.yfun.R
 import com.app.xandone.yfun.api.RetrofitClient
+import com.app.xandone.yfun.bean.WeatherXml
 import com.app.xandone.yfun.bean.WeatherXmlData
 import com.app.xandone.yfun.config.XConfig
 import com.app.xandone.yfun.ui.adapter.WeatherAdapter
@@ -23,7 +24,7 @@ class WeatherFragment : BaseFragment() {
     lateinit var mRecycle: RecyclerView
 
     lateinit var mWeatherAdapter: WeatherAdapter
-    var dataList = ArrayList<WeatherXmlData>()
+    var dataList = ArrayList<WeatherXml>()
 
     override fun getLayout(layoutId: Int): Int {
         return R.layout.frag_weather_layout
@@ -34,27 +35,27 @@ class WeatherFragment : BaseFragment() {
 
         mWeatherAdapter = WeatherAdapter(dataList)
         mRecycle.adapter = mWeatherAdapter
-        mRecycle.layoutManager = LinearLayoutManager(this.activity)
+        mRecycle.layoutManager = LinearLayoutManager(this.activity!!)
     }
 
     override fun initData() {
-        requestData()
+        for (i in 0..3) {
+            requestData(i)
+        }
     }
 
-    fun requestData() {
-        var map = HashMap<String, String>()
-        map.put("city", "%CE%E4%BA%BA")
-        map.put("password", XConfig.WEATHER_PSW)
-        map.put("day", "0")
+    fun requestData(day: Int) {
         RetrofitClient.gClient
-                .getWeather(map)
+                .getWeather("%CE%E4%BA%BA", XConfig.WEATHER_PSW, day.toString())
                 .compose(rxSchedulerHelper())
                 .subscribe(
                         { s ->
-                            dataList.addAll(s.list)
+                            dataList.add(s)
+                            Log.d("xandone", s.list[0].status1)
                             mWeatherAdapter.notifyDataSetChanged()
                         },
                         { e ->
+                            Log.d("xandone", "error")
                             e.printStackTrace()
                         }
                 )
