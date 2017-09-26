@@ -6,13 +6,13 @@ import android.util.Log
 import android.view.View
 import com.app.xandone.yfun.R
 import com.app.xandone.yfun.api.RetrofitClient
-import com.app.xandone.yfun.bean.WeatherBean
+import com.app.xandone.yfun.bean.WeatherXmlData
+import com.app.xandone.yfun.config.XConfig
 import com.app.xandone.yfun.ui.adapter.WeatherAdapter
 import com.app.xandone.yfun.ui.base.BaseFragment
 import io.reactivex.FlowableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.net.URLEncoder
 import java.util.*
 
 /**
@@ -23,7 +23,7 @@ class WeatherFragment : BaseFragment() {
     lateinit var mRecycle: RecyclerView
 
     lateinit var mWeatherAdapter: WeatherAdapter
-    var dataList = ArrayList<WeatherBean>()
+    var dataList = ArrayList<WeatherXmlData>()
 
     override fun getLayout(layoutId: Int): Int {
         return R.layout.frag_weather_layout
@@ -38,29 +38,24 @@ class WeatherFragment : BaseFragment() {
     }
 
     override fun initData() {
-        for (i in 0..3) {
-            dataList.add(WeatherBean("天气" + i, "晴天"))
-        }
-        mWeatherAdapter.notifyDataSetChanged()
-
         requestData()
     }
 
     fun requestData() {
-        var current_city_code = URLEncoder.encode("武汉", "gb2312").substring(0, 12)
         var map = HashMap<String, String>()
         map.put("city", "%CE%E4%BA%BA")
-        map.put("password", "DJOYnieT8234jlsK")
+        map.put("password", XConfig.WEATHER_PSW)
         map.put("day", "0")
         RetrofitClient.gClient
                 .getWeather(map)
                 .compose(rxSchedulerHelper())
                 .subscribe(
                         { s ->
-                            Log.d("xandone", "成功:" + s.list[0].status1)
+                            dataList.addAll(s.list)
+                            mWeatherAdapter.notifyDataSetChanged()
                         },
                         { e ->
-                            Log.d("xandone", "错误:" + e.printStackTrace())
+                            e.printStackTrace()
                         }
                 )
     }
