@@ -2,6 +2,7 @@ package com.app.xandone.yfun
 
 import android.app.Application
 import android.content.Context
+import com.wilddog.wilddogcore.WilddogApp
 
 /**
  * author: xandone
