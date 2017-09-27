@@ -10,5 +10,7 @@ object ApiConstants {
     val TOKEN = "abc"
     val BASE_URL = "http://php.weather.sina.com.cn/"
 
+    val FUN_URL = "https://xandone-weather.wilddogio.com"
+
 
 }

@@ -40,7 +40,6 @@
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/settingsun"
         android:transitionName="joke_item_img_trans" />
 
 </LinearLayout>

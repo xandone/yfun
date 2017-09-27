@@ -4,7 +4,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 /**
- * Created by xandone on 2017/1/6.
+ * author: xandone
+ * created on: 2017/8/24 13:25
  */
 @Root(name = "Weather", strict = false)
 public class WeatherXmlData {

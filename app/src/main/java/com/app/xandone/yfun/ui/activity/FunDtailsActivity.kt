@@ -7,6 +7,7 @@ import com.app.xandone.yfun.R
 import com.app.xandone.yfun.bean.FunBean
 import com.app.xandone.yfun.ui.adapter.FunAdapter
 import com.app.xandone.yfun.ui.base.BaseActivity
+import com.bumptech.glide.Glide
 
 /**
  * author: xandone
@@ -31,7 +32,9 @@ class FunDtailsActivity : BaseActivity() {
     override fun initData() {
         mTitle.text = funBean.title
         mContent.text = funBean.content
-        mImg.setBackgroundResource(R.drawable.settingsun)
+        Glide.with(this.applicationContext)
+                .load(funBean.imgUrl)
+                .into(mImg)
         mToolbar.setTitle(R.string.app_fun_name_details)
     }
 

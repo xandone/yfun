@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by xandone on 2017/1/6.
+ * author: xandone
+ * created on: 2017/8/24 13:25
  */
 @Root(name = "Profiles", strict = false)//需要解析的头部
 public class WeatherXml {

@@ -2,7 +2,6 @@ package com.app.xandone.yfun.ui.adapter
 
 import android.app.Activity
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.support.v7.widget.RecyclerView
@@ -12,10 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import com.app.xandone.yfun.App
 import com.app.xandone.yfun.R
 import com.app.xandone.yfun.bean.FunBean
 import com.app.xandone.yfun.ui.activity.FunDtailsActivity
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_fun_recycle.view.*//直接可以调用layout view id
 
 /**
@@ -43,6 +42,9 @@ class FunAdapter(var dataList: List<FunBean>, var activity: Activity) : Recycler
 
     fun bindView(itemView: View, position: Int) {
         var funBean = dataList[position]
+        Glide.with(activity.applicationContext)
+                .load(dataList[position].imgUrl)
+                .into(itemView.fun_item_img)
         itemView.fun_item_title.text = funBean.title
         itemView.fun_item_content.text = funBean.content
         itemView.fun_item_root.setOnClickListener({
