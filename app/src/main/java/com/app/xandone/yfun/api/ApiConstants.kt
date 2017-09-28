@@ -12,5 +12,7 @@ object ApiConstants {
 
     val FUN_URL = "https://xandone-weather.wilddogio.com"
 
+    val NBA_URL = "http://c.m.163.com/"
+
 
 }

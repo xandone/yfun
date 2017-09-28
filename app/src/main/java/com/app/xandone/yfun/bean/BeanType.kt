@@ -10,5 +10,3 @@ import java.io.Serializable
 
 @SuppressLint("ParcelCreator")
 data class FunBean(var title: String?, var content: String?, var imgUrl: String?, var date: String?) : Serializable
-
-data class WeatherBean(var title: String, var content: String)

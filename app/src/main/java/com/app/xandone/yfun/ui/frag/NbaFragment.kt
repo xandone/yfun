@@ -8,26 +8,25 @@ import com.app.xandone.yfun.R
 import com.app.xandone.yfun.api.ApiConstants
 import com.app.xandone.yfun.api.ApiService
 import com.app.xandone.yfun.api.RetrofitClient
-import com.app.xandone.yfun.bean.WeatherXml
-import com.app.xandone.yfun.config.XConfig
-import com.app.xandone.yfun.ui.adapter.WeatherAdapter
+import com.app.xandone.yfun.bean.BB
+import com.app.xandone.yfun.ui.adapter.NbaAdapter
 import com.app.xandone.yfun.ui.base.BaseFragment
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import io.reactivex.FlowableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.*
+import java.util.ArrayList
 
 /**
  * author: xandone
- * created on: 2017/8/23 16:22
+ * created on: 2017/9/28 22:48
  */
-class WeatherFragment : BaseFragment() {
+class NbaFragment : BaseFragment() {
     lateinit var mRecycle: RecyclerView
     lateinit var mRefresh: SmartRefreshLayout
 
-    lateinit var mWeatherAdapter: WeatherAdapter
-    var dataList = ArrayList<WeatherXml>()
+    lateinit var mNbaAdapter: NbaAdapter
+    var dataList = ArrayList<BB.T1348649145984Bean>()
 
     override fun getLayout(layoutId: Int): Int {
         return R.layout.frag_weather_layout
@@ -37,8 +36,8 @@ class WeatherFragment : BaseFragment() {
         mRecycle = view?.findViewById(R.id.frag_weather_recycle) as RecyclerView
         mRefresh = view.findViewById(R.id.frag_fun_refresh) as SmartRefreshLayout
 
-        mWeatherAdapter = WeatherAdapter(dataList)
-        mRecycle.adapter = mWeatherAdapter
+        mNbaAdapter = NbaAdapter(dataList, this.activity)
+        mRecycle.adapter = mNbaAdapter
         mRecycle.layoutManager = LinearLayoutManager(this.activity!!)
 
         mRefresh.setOnRefreshListener {
@@ -47,28 +46,7 @@ class WeatherFragment : BaseFragment() {
     }
 
     override fun initData() {
-        dataList.clear()
-        for (i in 0..3) {
-            requestData(i)
-        }
         getNba()
-    }
-
-    fun requestData(day: Int) {
-        RetrofitClient.createRetrofitXml(ApiService::class.java, ApiConstants.BASE_URL)
-                .getWeather("%CE%E4%BA%BA", XConfig.WEATHER_PSW, day.toString())
-                .compose(rxSchedulerHelper())
-                .subscribe(
-                        { s ->
-                            dataList.add(s)
-                            mRefresh.finishRefresh()
-                            mWeatherAdapter.notifyDataSetChanged()
-                        },
-                        { e ->
-                            mRefresh.finishRefresh()
-                            e.printStackTrace()
-                        }
-                )
     }
 
     fun getNba() {
@@ -77,7 +55,10 @@ class WeatherFragment : BaseFragment() {
                 .compose(rxSchedulerHelper())
                 .subscribe(
                         { s ->
+                            dataList.clear()
+                            dataList.addAll(s.t1348649145984)
                             mRefresh.finishRefresh()
+                            mNbaAdapter.notifyDataSetChanged()
                             Log.d("yandone", s.t1348649145984!![0].lmodify)
                         },
                         { e ->

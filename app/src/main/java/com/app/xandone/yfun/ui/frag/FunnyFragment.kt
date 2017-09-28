@@ -68,7 +68,6 @@ class FunnyFragment : BaseFragment() {
                 for (obj in list) {
                     val data = obj as Map<String, String>
                     if (!TextUtils.isEmpty(data["title"])) {
-                        Log.d("xandone", data["title"])
                         dataList.add(FunBean(data["title"], data["content"],
                                 data["url"], data["mydate"]))
                     }

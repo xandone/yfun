@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar
 import com.app.xandone.yfun.ui.adapter.MainVpAdaper
 import com.app.xandone.yfun.ui.base.BaseActivity
 import com.app.xandone.yfun.ui.frag.FunnyFragment
+import com.app.xandone.yfun.ui.frag.NbaFragment
 import com.app.xandone.yfun.ui.frag.WeatherFragment
 import java.util.ArrayList
 
@@ -21,11 +22,11 @@ class MainActivity : BaseActivity() {
     lateinit var toolbar: Toolbar
     lateinit var tabLayout: TabLayout
 
-    lateinit var weatherFrag: WeatherFragment
+    lateinit var nbaFragment: NbaFragment
     lateinit var funnyFrag: FunnyFragment
 
     lateinit var fragments: ArrayList<Fragment>
-    var titlesRes: ArrayList<Int> = arrayListOf(R.string.app_weather_name, R.string.app_fun_name)
+    var titlesRes: ArrayList<Int> = arrayListOf(R.string.app_nba_name, R.string.app_fun_name)
     lateinit var mainVpAadpter: MainVpAdaper
 
     override fun setLayout(layoutId: Int): Int {
@@ -38,11 +39,11 @@ class MainActivity : BaseActivity() {
         tabLayout = findViewById(R.id.tabLayout) as TabLayout
 
         fragments = ArrayList()
-        weatherFrag = WeatherFragment()
+        nbaFragment = NbaFragment()
         funnyFrag = FunnyFragment()
-        fragments.add(weatherFrag)
+        fragments.add(nbaFragment)
         fragments.add(funnyFrag)
-        var titles = titlesRes.map(this::getString)
+        val titles = titlesRes.map(this::getString)
         mainVpAadpter = MainVpAdaper(fragments, titles, supportFragmentManager)
         mainVp.adapter = mainVpAadpter
         tabLayout.setupWithViewPager(mainVp)

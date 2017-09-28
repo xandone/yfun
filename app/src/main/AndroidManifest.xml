@@ -23,6 +23,9 @@
         <activity
             android:name=".ui.activity.FunDtailsActivity"
             android:label="@string/app_fun_name_details" />
+        <activity
+            android:name=".ui.activity.NbaDtailsActivity"
+            android:label="@string/app_nba_name_details" />
 
         <receiver android:name="com.wilddog.client.receiver.WilddogAuthCastReceiver">
             <intent-filter>

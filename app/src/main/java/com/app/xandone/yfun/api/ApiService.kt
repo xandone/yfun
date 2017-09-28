@@ -1,5 +1,8 @@
 package com.app.xandone.yfun.api
 
+import com.app.xandone.yfun.bean.BB
+import com.app.xandone.yfun.bean.FunBean
+import com.app.xandone.yfun.bean.NbaBean
 import com.app.xandone.yfun.bean.WeatherXml
 import io.reactivex.Flowable
 import retrofit2.http.*
@@ -20,4 +23,9 @@ interface ApiService {
             @Query("password") psw: String,
             @Query("day") day: String
     ): Flowable<WeatherXml>
+
+    @GET("nc/article/list/T1348649145984/{startPage}-20.html")
+    fun getNBAdata(
+            @Path("startPage") startPage: Int
+    ): Flowable<BB>
 }

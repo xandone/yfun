@@ -47,8 +47,8 @@ class FunAdapter(var dataList: List<FunBean>, var activity: Activity) : Recycler
                 .into(itemView.fun_item_img)
         itemView.fun_item_title.text = funBean.title
         itemView.fun_item_content.text = funBean.content
-        itemView.fun_item_root.setOnClickListener({
-            var intent = Intent(activity, FunDtailsActivity::class.java)
+        itemView.fun_item_root.setOnClickListener {
+            val intent = Intent(activity, FunDtailsActivity::class.java)
             intent.putExtra(FUNADAPTER_POTISION, dataList[position])
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity,
@@ -58,7 +58,7 @@ class FunAdapter(var dataList: List<FunBean>, var activity: Activity) : Recycler
             } else {
 
             }
-        })
+        }
 
     }
 
