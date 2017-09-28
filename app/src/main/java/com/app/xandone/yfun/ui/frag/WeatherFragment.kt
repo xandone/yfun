@@ -11,6 +11,7 @@ import com.app.xandone.yfun.bean.WeatherXmlData
 import com.app.xandone.yfun.config.XConfig
 import com.app.xandone.yfun.ui.adapter.WeatherAdapter
 import com.app.xandone.yfun.ui.base.BaseFragment
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import io.reactivex.FlowableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -22,6 +23,7 @@ import java.util.*
  */
 class WeatherFragment : BaseFragment() {
     lateinit var mRecycle: RecyclerView
+    lateinit var mRefresh: SmartRefreshLayout
 
     lateinit var mWeatherAdapter: WeatherAdapter
     var dataList = ArrayList<WeatherXml>()
@@ -32,13 +34,19 @@ class WeatherFragment : BaseFragment() {
 
     override fun initView(view: View?) {
         mRecycle = view?.findViewById(R.id.frag_weather_recycle) as RecyclerView
+        mRefresh = view.findViewById(R.id.frag_fun_refresh) as SmartRefreshLayout
 
         mWeatherAdapter = WeatherAdapter(dataList)
         mRecycle.adapter = mWeatherAdapter
         mRecycle.layoutManager = LinearLayoutManager(this.activity!!)
+
+        mRefresh.setOnRefreshListener {
+            initData()
+        }
     }
 
     override fun initData() {
+        dataList.clear()
         for (i in 0..3) {
             requestData(i)
         }
@@ -51,11 +59,11 @@ class WeatherFragment : BaseFragment() {
                 .subscribe(
                         { s ->
                             dataList.add(s)
-                            Log.d("xandone", s.list[0].status1)
+                            mRefresh.finishRefresh()
                             mWeatherAdapter.notifyDataSetChanged()
                         },
                         { e ->
-                            Log.d("xandone", "error")
+                            mRefresh.finishRefresh()
                             e.printStackTrace()
                         }
                 )

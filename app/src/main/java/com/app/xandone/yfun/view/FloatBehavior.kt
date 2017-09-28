@@ -22,7 +22,6 @@ class FloatBehavior(context: Context?, attrs: AttributeSet?) : FloatingActionBut
     override fun onNestedScroll(coordinatorLayout: CoordinatorLayout?, child: FloatingActionButton?,
                                 target: View?, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed)
-        Log.d("yandone", "oooooo");
         if (dyConsumed > 0 && child!!.visibility == View.VISIBLE) {
             child.hide()
         } else if (dyConsumed < 0 && child!!.visibility != View.VISIBLE) {
