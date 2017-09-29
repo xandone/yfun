@@ -84,20 +84,20 @@ class NbaAdapter(var dataList: List<BB.T1348649145984Bean>, var activity: Activi
     inner class NbaOther(view: View) : RecyclerView.ViewHolder(view) {
         fun bindView(view: View, position: Int) {
             Glide.with(activity.applicationContext)
-                    .load(dataList[position - 1].imgsrc)
+                    .load(dataList[position].imgsrc)
                     .into(itemView.nba_item_img)
             view.nba_item_title.text = dataList[position].title
             view.nba_item_content.text = dataList[position].digest
             view.nba_item_root.setOnClickListener {
                 val intent = Intent(activity, NbaDtailsActivity::class.java)
-                intent.putExtra(FunAdapter.FUNADAPTER_POTISION, dataList[position - 1])
+                intent.putExtra(FunAdapter.FUNADAPTER_POTISION, dataList[position])
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity,
                             Pair.create<View, String>(view.nba_item_title as View?, "joke_item_title_trans"),
                             Pair.create<View, String>(view.nba_item_content as View?, "joke_item_content_trans"),
                             Pair.create<View, String>(view.nba_item_img as View?, "joke_item_img_trans")).toBundle())
                 } else {
-
+                    activity.startActivity(intent)
                 }
             }
         }

@@ -335,7 +335,7 @@ public class BB implements Serializable {
             this.imgextra = imgextra;
         }
 
-        public static class ImgextraBean {
+        public static class ImgextraBean implements Serializable {
             /**
              * imgsrc : http://cms-bucket.nosdn.127.net/0a8648c3d0754a0f955f9189fcc145ea20170928100957.png
              */

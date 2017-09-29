@@ -3,16 +3,14 @@ package com.app.xandone.yfun.ui.frag
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
-import android.widget.Toast
+import com.app.xandone.yfun.App
 import com.app.xandone.yfun.R
 import com.app.xandone.yfun.api.ApiConstants
 import com.app.xandone.yfun.bean.FunBean
 import com.app.xandone.yfun.ui.adapter.FunAdapter
 import com.app.xandone.yfun.ui.base.BaseFragment
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import com.wilddog.client.*
 import com.wilddog.wilddogcore.WilddogApp
 import com.wilddog.wilddogcore.WilddogOptions
@@ -28,8 +26,16 @@ class FunnyFragment : BaseFragment() {
     lateinit var funAdapter: FunAdapter
     var dataList = ArrayList<FunBean>()
 
-    lateinit var mWilddogOptions: WilddogOptions
-    lateinit var mRef: SyncReference
+
+    companion object {
+        var mRef: SyncReference
+
+        init {
+            val mWilddogOptions = WilddogOptions.Builder().setSyncUrl(ApiConstants.FUN_URL).build()
+            WilddogApp.initializeApp(App.sContext, mWilddogOptions)
+            mRef = WilddogSync.getInstance().reference
+        }
+    }
 
     override fun getLayout(layoutId: Int): Int {
         return R.layout.frag_funny_layout
@@ -45,25 +51,18 @@ class FunnyFragment : BaseFragment() {
     }
 
     override fun initData() {
-        initDog()
         getData(mRef)
-
         mRefresh.setOnRefreshListener {
             getData(mRef)
         }
     }
 
-    fun initDog() {
-        mWilddogOptions = WilddogOptions.Builder().setSyncUrl(ApiConstants.FUN_URL).build()
-        WilddogApp.initializeApp(this.activity.applicationContext, mWilddogOptions)
-        mRef = WilddogSync.getInstance().reference
-    }
 
     fun getData(ref: SyncReference) {
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var value = dataSnapshot.value as Map<*, *>
-                var list = value["results"] as List<*>
+                val value = dataSnapshot.value as Map<*, *>
+                val list = value["results"] as List<*>
                 dataList.clear()
                 for (obj in list) {
                     val data = obj as Map<String, String>

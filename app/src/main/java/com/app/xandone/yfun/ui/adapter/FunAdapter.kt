@@ -56,7 +56,7 @@ class FunAdapter(var dataList: List<FunBean>, var activity: Activity) : Recycler
                         Pair.create<View, String>(itemView.fun_item_content as View?, "joke_item_content_trans"),
                         Pair.create<View, String>(itemView.fun_item_img as View?, "joke_item_img_trans")).toBundle())
             } else {
-
+                activity.startActivity(intent)
             }
         }
 

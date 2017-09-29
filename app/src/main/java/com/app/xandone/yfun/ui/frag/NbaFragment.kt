@@ -28,6 +28,10 @@ class NbaFragment : BaseFragment() {
     lateinit var mNbaAdapter: NbaAdapter
     var dataList = ArrayList<BB.T1348649145984Bean>()
 
+    var mPager: Int = 0
+    val MODE_REFRESH = 0
+    val MODE_LOAD = 1
+
     override fun getLayout(layoutId: Int): Int {
         return R.layout.frag_weather_layout
     }
@@ -41,28 +45,42 @@ class NbaFragment : BaseFragment() {
         mRecycle.layoutManager = LinearLayoutManager(this.activity!!)
 
         mRefresh.setOnRefreshListener {
-            getNba()
+            getNba(mPager, MODE_REFRESH)
+            Log.d("yandone", mPager.toString())
+        }
+        mRefresh.setOnLoadmoreListener {
+            mPager += 20
+            getNba(mPager, MODE_LOAD)
         }
     }
 
     override fun initData() {
-        getNba()
+        getNba(mPager, MODE_REFRESH)
     }
 
-    fun getNba() {
+    fun getNba(pager: Int, mode: Int) {
         RetrofitClient.createRetrofitJson(ApiService::class.java, ApiConstants.NBA_URL)
-                .getNBAdata(0)
+                .getNBAdata(pager)
                 .compose(rxSchedulerHelper())
                 .subscribe(
                         { s ->
-                            dataList.clear()
-                            dataList.addAll(s.t1348649145984)
-                            mRefresh.finishRefresh()
-                            mNbaAdapter.notifyDataSetChanged()
-                            Log.d("yandone", s.t1348649145984!![0].lmodify)
+                            when (mode) {
+                                MODE_REFRESH -> {
+                                    dataList.clear()
+                                    dataList.addAll(s.t1348649145984)
+                                    mNbaAdapter.notifyDataSetChanged()
+                                    mRefresh.finishRefresh()
+                                }
+                                MODE_LOAD -> {
+                                    dataList.addAll(s.t1348649145984)
+                                    mNbaAdapter.notifyDataSetChanged()
+                                    mRefresh.finishLoadmore()
+                                }
+                            }
                         },
                         { e ->
                             mRefresh.finishRefresh()
+                            mRefresh.finishLoadmore()
                             e.printStackTrace()
                         }
                 )
