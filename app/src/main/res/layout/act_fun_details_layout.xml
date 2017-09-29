@@ -7,7 +7,7 @@
     <include layout="@layout/toolbar_layout" />
 
     <ScrollView
-        android:id="@+id/joke_details_title_sv"
+        android:id="@+id/fun_details_title_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,23 +16,23 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/joke_details_title_img"
+                android:id="@+id/fun_details_title_img"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:scaleType="centerCrop"
                 android:transitionName="joke_item_img_trans" />
 
             <RelativeLayout
-                android:id="@+id/joke_details_title_rl"
+                android:id="@+id/fun_details_title_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/joke_details_title_img"
+                android:layout_below="@+id/fun_details_title_img"
                 android:layout_margin="10dp"
                 android:background="@drawable/bg_card"
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/joke_details_title"
+                    android:id="@+id/fun_details_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -43,10 +43,10 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/joke_details_content"
+                android:id="@+id/fun_details_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/joke_details_title_rl"
+                android:layout_below="@+id/fun_details_title_rl"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:lineSpacingMultiplier="1.2"
@@ -55,11 +55,11 @@
                 android:transitionName="joke_item_content_trans" />
 
             <TextView
-                android:id="@+id/joke_details_content_date"
+                android:id="@+id/fun_details_content_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/joke_details_content"
+                android:layout_below="@+id/fun_details_content"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
