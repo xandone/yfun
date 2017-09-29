@@ -5,7 +5,7 @@
     <string name="app_nba_name">NBA</string>
     <string name="app_fun_name">笑话</string>
     <string name="app_fun_name_details">笑话详情</string>
-    <string name="app_nba_name_details">新闻详情</string>
+    <string name="app_nba_name_details">详情</string>
 
     <string name="one_status_temp_l">L:%1$s℃—</string>
     <string name="one_status_temp_h">H:%1$s℃</string>

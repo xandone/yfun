@@ -6,9 +6,19 @@
 
     <color name="white">#fff</color>
     <color name="black">#000</color>
+    <color name="red">#FFFF0000</color>
+    <color name="deep_yellow">#FFCAD312</color>
+
     <color name="dark_black">#3D3C3C</color>
     <color name="normal_tv">#3D3C3C</color>
     <color name="light_tv">#A0A6A5</color>
     <color name="light_tv_black">#6A6868</color>
     <color name="middle_tv_black">#535252</color>
+
+    <color name="alpha_05_black">#0D000000</color>
+    <color name="alpha_10_black">#1A000000</color>
+    <color name="alpha_15_black">#26000000</color>
+    <color name="alpha_20_black">#33000000</color>
+    <color name="alpha_25_black">#40000000</color>
+    <color name="alpha_30_black">#4D000000</color>
 </resources>

@@ -1,9 +1,6 @@
 package com.app.xandone.yfun.api
 
-import com.app.xandone.yfun.bean.BB
-import com.app.xandone.yfun.bean.FunBean
-import com.app.xandone.yfun.bean.NbaBean
-import com.app.xandone.yfun.bean.WeatherXml
+import com.app.xandone.yfun.bean.*
 import io.reactivex.Flowable
 import retrofit2.http.*
 
@@ -28,4 +25,9 @@ interface ApiService {
     fun getNBAdata(
             @Path("startPage") startPage: Int
     ): Flowable<BB>
+
+    @GET("nc/article/{postId}/full.html")
+    fun getNbaDetail(
+            @Path("postId") postId: String
+    ): Flowable<Map<String, NbaDetailsBean>>
 }
