@@ -37,11 +37,15 @@ class NbaDtailsActivity : BaseActivity() {
     }
 
     override fun initData() {
-        getNbaDetail(nbaBean.postid)
-        Glide.with(this.applicationContext)
-                .load(nbaBean.imgsrc)
-                .into(mImg)
-        mToolbar.title = nbaBean.title
+        try {
+            getNbaDetail(nbaBean.postid)
+            Glide.with(this.applicationContext)
+                    .load(nbaBean.imgsrc)
+                    .into(mImg)
+            mToolbar.title = nbaBean.title
+        } catch (e: Throwable) {
+
+        }
     }
 
     override fun setLayout(layoutId: Int): Int = R.layout.act_nba_details_layout

@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import com.app.xandone.yfun.R
 import com.app.xandone.yfun.bean.BB
 import com.app.xandone.yfun.ui.activity.NbaDtailsActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_nba_recycler.view.*
+import kotlinx.android.synthetic.main.item_nba_vp.view.*
 
 /**
  * author: xandone
@@ -28,7 +30,7 @@ class NbaAdapter(var dataList: List<BB.T1348649145984Bean>, var activity: Activi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == ITEM_TYPE_ONE) {
-            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_nba_recycler, parent, false)
+            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_nba_vp, parent, false)
             return NbaOne(view)
         } else {
             var view = LayoutInflater.from(parent.context).inflate(R.layout.item_nba_recycler, parent, false)
@@ -72,12 +74,25 @@ class NbaAdapter(var dataList: List<BB.T1348649145984Bean>, var activity: Activi
     }
 
     inner class NbaOne(view: View) : RecyclerView.ViewHolder(view) {
+        val imgs = ArrayList<ImageView>()
+        var vpAdapter: NbaVpAdapter
+
+        init {
+            vpAdapter = NbaVpAdapter(imgs)
+            view.item_nba_vp_root.adapter = vpAdapter
+        }
+
         fun bindView(view: View, position: Int) {
-            Glide.with(activity.applicationContext)
-                    .load(dataList[position].imgsrc)
-                    .into(itemView.nba_item_img)
-            view.nba_item_title.text = dataList[position].title
-            view.nba_item_content.text = dataList[position].digest
+            imgs.clear()
+            val len = if (dataList.size > 3) 3 else dataList.size
+            for (i in 0..len) {
+                val iv = ImageView(activity)
+                imgs.add(iv)
+                Glide.with(activity.applicationContext)
+                        .load(dataList[i].imgsrc)
+                        .into(iv)
+            }
+            vpAdapter.notifyDataSetChanged()
         }
     }
 
