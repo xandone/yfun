@@ -24,7 +24,7 @@ interface ApiService {
     @GET("nc/article/list/T1348649145984/{startPage}-20.html")
     fun getNBAdata(
             @Path("startPage") startPage: Int
-    ): Flowable<BB>
+    ): Flowable<NbaBean>
 
     @GET("nc/article/{postId}/full.html")
     fun getNbaDetail(

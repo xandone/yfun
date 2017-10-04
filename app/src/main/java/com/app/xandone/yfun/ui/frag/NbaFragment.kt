@@ -8,7 +8,7 @@ import com.app.xandone.yfun.R
 import com.app.xandone.yfun.api.ApiConstants
 import com.app.xandone.yfun.api.ApiService
 import com.app.xandone.yfun.api.RetrofitClient
-import com.app.xandone.yfun.bean.BB
+import com.app.xandone.yfun.bean.NbaBean
 import com.app.xandone.yfun.ui.adapter.NbaAdapter
 import com.app.xandone.yfun.ui.base.BaseFragment
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -26,7 +26,7 @@ class NbaFragment : BaseFragment() {
     lateinit var mRefresh: SmartRefreshLayout
 
     lateinit var mNbaAdapter: NbaAdapter
-    var dataList = ArrayList<BB.T1348649145984Bean>()
+    var dataList = ArrayList<NbaBean.T1348649145984Bean>()
 
     var mPager: Int = 0
     val MODE_REFRESH = 0

@@ -8,7 +8,7 @@ import java.util.List;
  * created on: 2017/9/28 22:44
  */
 
-public class BB implements Serializable {
+public class NbaBean implements Serializable {
 
     private List<T1348649145984Bean> T1348649145984;
 

@@ -3,14 +3,13 @@ package com.app.xandone.yfun.ui.activity
 import android.os.Build
 import android.support.v7.widget.Toolbar
 import android.text.Html
-import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import com.app.xandone.yfun.R
 import com.app.xandone.yfun.api.ApiConstants
 import com.app.xandone.yfun.api.ApiService
 import com.app.xandone.yfun.api.RetrofitClient
-import com.app.xandone.yfun.bean.BB
+import com.app.xandone.yfun.bean.NbaBean
 import com.app.xandone.yfun.ui.adapter.FunAdapter
 import com.app.xandone.yfun.ui.base.BaseActivity
 import com.bumptech.glide.Glide
@@ -23,14 +22,14 @@ import io.reactivex.schedulers.Schedulers
  * created on: 2017/8/27 22:19
  */
 class NbaDtailsActivity : BaseActivity() {
-    lateinit var nbaBean: BB.T1348649145984Bean
+    lateinit var nbaBean: NbaBean.T1348649145984Bean
 
     lateinit var mContent: TextView
     lateinit var mImg: ImageView
     lateinit var mToolbar: Toolbar
 
     override fun initView() {
-        nbaBean = intent.getSerializableExtra(FunAdapter.FUNADAPTER_POTISION) as BB.T1348649145984Bean
+        nbaBean = intent.getSerializableExtra(FunAdapter.FUNADAPTER_POTISION) as NbaBean.T1348649145984Bean
         mContent = findViewById(R.id.joke_details_content) as TextView
         mImg = findViewById(R.id.joke_details_title_img) as ImageView
         mToolbar = findViewById(R.id.toolbar) as Toolbar

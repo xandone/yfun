@@ -13,7 +13,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.app.xandone.yfun.R
-import com.app.xandone.yfun.bean.BB
+import com.app.xandone.yfun.bean.NbaBean
 import com.app.xandone.yfun.ui.activity.NbaDtailsActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_nba_recycler.view.*
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.item_nba_vp.view.*
  * author: xandone
  * created on: 2017/8/24 14:38
  */
-class NbaAdapter(var dataList: List<BB.T1348649145984Bean>, var activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NbaAdapter(var dataList: List<NbaBean.T1348649145984Bean>, var activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val ITEM_TYPE_ONE: Int = 1
     val ITEM_TYPE_NORMAL: Int = 2
     var mLastPosition = -1
@@ -87,6 +87,7 @@ class NbaAdapter(var dataList: List<BB.T1348649145984Bean>, var activity: Activi
             val len = if (dataList.size > 3) 3 else dataList.size
             for (i in 0..len) {
                 val iv = ImageView(activity)
+                iv.scaleType = ImageView.ScaleType.CENTER_CROP
                 imgs.add(iv)
                 Glide.with(activity.applicationContext)
                         .load(dataList[i].imgsrc)
